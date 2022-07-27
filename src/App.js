@@ -3,9 +3,7 @@ import BookList from "./components/BookList";
 import { nanoid } from "nanoid";
 
 export default function App() {
-  const [books, setBooks] = useState(
-    JSON.parse(localStorage.getItem("books")) || []
-  );
+  const [books, setBooks] = useState([]);
   const [newBook, setNewBook] = useState({
     title: "",
     author: "",
@@ -13,9 +11,9 @@ export default function App() {
   });
   const [repeatNotice, setRepeatNotice] = useState(false);
 
-  useEffect(() => {
-    localStorage.setItem("books", JSON.stringify(books));
-  }, [books]);
+  // useEffect(() => {
+  //   localStorage.setItem("books", JSON.stringify(books));
+  // }, [books]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -49,6 +47,11 @@ export default function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     updateBooks();
+    setNewBook({
+      title: "",
+      author: "",
+      id: "",
+    });
   };
 
   return (
